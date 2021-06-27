@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+MAP="TheIsland"
+SERVER_OPTS="?SessionName=AudiohackedIsland?ServerPassword=redhatredhat?ServerAdminPassword=lostinthefiberoftime?Port=7777?QueryPort=27015?serverPVE=True"
+SERVER_ARGS="-server -log -NoBattlEye"
+
+cd /home/steam/apps/ark/ShooterGame/Binaries/Linux
+./ShooterGameServer \"${MAP}?listen${SERVER_OPTS}\" ${SERVER_ARGS}

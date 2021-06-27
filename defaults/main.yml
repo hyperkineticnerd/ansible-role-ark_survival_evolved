@@ -1,0 +1,21 @@
+---
+# defaults file for valheim
+
+# steamcmd configuration
+steamcmd_user: steam
+steamcmd_user_home: /home/{{ steamcmd_user }}
+steamcmd_directory: /home/{{ steamcmd_user }}/cmd
+steamcmd_steam:
+  username: anonymous
+  password:
+
+# Valheim
+valheim_install_dir: '{{ steamcmd_user_home }}/apps/valheim'
+valheim_app_id: 896660
+valheim_saas: true
+
+# Valheim Server
+valheim_server_name: "ValheimDedicatedServerLinux"
+valheim_server_port: 2456
+valheim_server_password: "redhatredhat"
+valheim_world_name: "ValheimDedicated"

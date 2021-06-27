@@ -1,0 +1,19 @@
+[Unit]
+Description=ARK: Survival Evolved dedicated server
+Wants=network-online.target
+After=syslog.target network.target nss-lookup.target network-online.target
+
+[Service]
+User=steam
+Group=steam
+LimitNOFILE=100000
+EnvironmentFile=/etc/default/ark-dedicated
+WorkingDirectory=/home/steam/apps/ark/ShooterGame/Binaries/Linux
+#ExecStartPre=/home/steam/cmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/apps/ark +app_update 376030 +quit
+ExecStart=/home/steam/apps/ark/ShooterGame/Binaries/Linux/ShooterGameServer \"${MAP}?listen${SERVER_OPTS}\" ${SERVER_ARGS}
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s INT $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+

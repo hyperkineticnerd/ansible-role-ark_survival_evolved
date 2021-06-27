@@ -1,0 +1,16 @@
+[Unit]
+Description=Valheim Dedicated Server
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User={{ steamcmd_user }}
+Group={{ steamcmd_user }}
+EnvironmentFile=/etc/default/valheim
+WorkingDirectory={{ valheim_install_dir }}
+ExecStart={{ valheim_install_dir }}/valheim_server.x86_64 -name ${NAME} -port ${PORT} -password ${PASSWORD} -world ${WORLD} ${OPTS}
+ExecStop=echo 1 > server_exit.drp
+
+[Install]
+WantedBy=multi-user.target

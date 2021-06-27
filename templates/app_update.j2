@@ -1,0 +1,6 @@
+@ShutdownOnFailedCommand 1
+@NoPromptForPassword 1
+login {{ steamcmd_steam.username|default(anonymous) }} {{ steamcmd_steam.password|default(omit) }}
+force_install_dir {{ valheim_install_dir }}
+app_update {{ valheim_app_id }} validate
+quit

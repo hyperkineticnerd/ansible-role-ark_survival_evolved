@@ -1,0 +1,5 @@
+---
+- name: install the dependencies required to run server
+  package: name={{ item }} state=present
+  with_items:
+    - screen

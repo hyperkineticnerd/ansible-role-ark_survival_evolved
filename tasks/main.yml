@@ -1,0 +1,12 @@
+---
+# tasks file for valheim
+- include: requirements.yml
+
+- include: packages.yml
+
+- include: app.yml
+
+# - include: config.yml
+
+- include: service_systemd.yml
+  when: valheim_saas

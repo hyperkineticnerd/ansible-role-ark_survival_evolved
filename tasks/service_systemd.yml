@@ -1,0 +1,39 @@
+---
+- name: copy service into place
+  template:
+    src: saas/valheim.service.j2
+    dest: /etc/systemd/system/valheim.service
+    owner: '{{ steamcmd_user }}'
+    group: '{{ steamcmd_user }}'
+    mode: '0644'
+
+- name: create /etc/default/valheim
+  copy:
+    content: |
+      SteamAppId="892970"
+      LD_LIBRARY_PATH="{{ valheim_install_dir }}/linux64:$LD_LIBRARY_PATH"
+      NAME="{{ valheim_server_name }}"
+      PORT="{{ valheim_server_port }}"
+      PASSWORD="{{ valheim_server_password }}"
+      WORLD="{{ valheim_world_name }}"
+      OPTS="-public 1"
+    dest: '/etc/default/valheim'
+    owner: '{{ steamcmd_user }}'
+    group: '{{ steamcmd_user }}'
+    mode: '0644'
+
+# - name: ensure the server is enabled and will start on boot
+#   service:
+#     name: valheim
+#     state: started
+#     enabled: yes
+
+# - name: setup rsyslog for valheim
+#   copy:
+#     content: |
+#       if $programname == '{{ valheim_rsyslog_id }}' then {{ valheim_install_dir }}/logs/valheim.log
+#       & stop
+#     dest: '/etc/rsyslog.d/valheim.conf'
+#     owner: 'root'
+#     group: 'root'
+#     mode: '0644'

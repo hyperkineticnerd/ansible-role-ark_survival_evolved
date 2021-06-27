@@ -1,0 +1,24 @@
+---
+
+- name: ensures {{ valheim_install_dir }}/bin/ directory exists
+  file:
+    path: '{{ valheim_install_dir }}/bin/'
+    owner: '{{ steamcmd_user }}'
+    group: '{{ steamcmd_user }}'
+    mode: '0755'
+    recurse: yes
+    state: directory
+
+- name: create update script
+  template:
+    src: app_update.j2
+    dest: '{{ valheim_install_dir }}/bin/app_{{ valheim_app_id }}.txt'
+    owner: '{{ steamcmd_user }}'
+    group: '{{ steamcmd_user }}'
+    mode: '0644'
+
+- name: install or update app
+  command: '{{ steamcmd_directory }}/steamcmd.sh +runscript {{ valheim_install_dir }}/bin/update'
+  async: 300
+  poll: 5
+  register: app_update
